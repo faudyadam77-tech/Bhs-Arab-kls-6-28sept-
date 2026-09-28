@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pembelajaran Bahasa Arab - Bilangan 1-20 (Level Lanjut)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+  
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    padding: 20px;
+    color: #333;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    overflow: hidden;
+  }
+  
+  header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4a69bd 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+  }
+  
+  header h1 { font-size: 26px; margin-bottom: 8px; }
+  header p { opacity: 0.9; font-size: 15px; }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-top: 10px;
+  }
+  
+  .page { display: none; padding: 30px; }
+  .page.active { display: block; animation: fadeIn 0.4s ease; }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  h2 {
+    color: #1e3c72;
+    border-bottom: 3px solid #2a5298;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+  
+  h3 { color: #444; margin: 15px 0 10px; font-size: 17px; }
+  
+  p { line-height: 1.7; margin-bottom: 12px; }
+  
+  .info-box {
+    background: #f0f4ff;
+    border-left: 4px solid #2a5298;
+    padding: 15px 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+  }
+  
+  .info-box strong { color: #1e3c72; }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+  }
+  
+  th {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-size: 15px;
+  }
+  
+  td {
+    padding: 10px 12px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 15px;
+  }
+  
+  tr:nth-child(even) { background: #f8f9ff; }
+  tr:hover { background: #eef1ff; }
+  
+  .arabic {
+    font-family: 'Traditional Arabic', 'Amiri', serif;
+    font-size: 22px;
+    color: #1e3c72;
+    direction: rtl;
+  }
+  
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 10px;
+  }
+  
+  button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .btn-primary {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+  }
+  
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(42,82,152,0.4); }
+  
+  .btn-secondary {
+    background: #e0e0e0;
+    color: #555;
+  }
+  
+  .btn-secondary:hover { background: #d0d0d0; }
+  
+  .btn-success {
+    background: linear-gradient(135deg, #0f766e, #14b8a6);
+    color: white;
+  }
+  
+  .btn-success:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(15,118,110,0.4); }
+  
+  .form-group { margin-bottom: 15px; }
+  
+  label { display: block; margin-bottom: 6px; font-weight: 600; color: #444; }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border 0.3s;
+  }
+  
+  input[type="text"]:focus {
+    outline: none;
+    border-color: #2a5298;
+  }
+  
+  .question {
+    background: #f8f9ff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 4px solid #2a5298;
+  }
+  
+  .question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  
+  .question-header p {
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+    flex: 1;
+  }
+  
+  .type-badge {
+    background: #2a5298;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+  
+  .options label {
+    display: block;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: normal;
+  }
+  
+  .options label:hover { border-color: #2a5298; background: #f0f4ff; }
+  
+  .options input[type="radio"] { margin-right: 10px; }
+  
+  .fill-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    text-align: center;
+    font-family: 'Traditional Arabic', 'Amiri', serif;
+    direction: rtl;
+  }
+  
+  .fill-input:focus { border-color: #2a5298; outline: none; }
+  
+  .hint {
+    font-size: 13px;
+    color: #666;
+    margin-top: 6px;
+    font-style: italic;
+  }
+  
+  .result-box {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #f0f4ff, #e8ecff);
+    border-radius: 12px;
+    margin: 20px 0;
+  }
+  
+  .score {
+    font-size: 72px;
+    font-weight: bold;
+    color: #1e3c72;
+    margin: 10px 0;
+  }
+  
+  .score-label { font-size: 18px; color: #666; }
+  
+  .status {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 20px;
+    margin-top: 15px;
+    font-weight: 600;
+  }
+  
+  .status.success { background: #d4edda; color: #155724; }
+  .status.pending { background: #fff3cd; color: #856404; }
+  .status.error { background: #f8d7da; color: #721c24; }
+  
+  .review-item {
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border-left: 4px solid;
+  }
+  
+  .review-item.correct { background: #d4edda; border-color: #28a745; }
+  .review-item.wrong { background: #f8d7da; border-color: #dc3545; }
+  
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+  }
+  
+  .stat-box {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  
+  .stat-box .num {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1e3c72;
+  }
+  
+  .stat-box .lbl {
+    font-size: 13px;
+    color: #666;
+    margin-top: 4px;
+  }
+  
+  @media (max-width: 600px) {
+    header h1 { font-size: 20px; }
+    .page { padding: 20px; }
+    td, th { padding: 8px 6px; font-size: 13px; }
+    .arabic { font-size: 18px; }
+    .stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>العدد — Bilangan 1 sampai 20</h1>
+    <p>Pendidikan Bahasa Arab · Kelas 6 SD</p>
+    <div class="badge">⭐ Level Lanjut</div>
+  </header>
+
+  <!-- HALAMAN 1: MATERI -->
+  <div class="page active" id="page-materi">
+    <h2>📘 Materi Pembelajaran</h2>
+    
+    <div class="info-box">
+      <strong>Tujuan Pembelajaran:</strong> Siswa mampu membaca, menulis, menghitung, dan menggunakan bilangan 1-20 dalam bahasa Arab pada berbagai konteks (angka, hitungan, kalimat).
+    </div>
+
+    <h3>Bilangan 1 - 10</h3>
+    <table>
+      <thead>
+        <tr><th>Angka</th><th>Bahasa Arab</th><th>Cara Baca</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td class="arabic">وَاحِدٌ</td><td>Waahidun</td></tr>
+        <tr><td>2</td><td class="arabic">اِثْنَانِ</td><td>Itsnani</td></tr>
+        <tr><td>3</td><td class="arabic">ثَلَاثَةٌ</td><td>Tsalaatsatun</td></tr>
+        <tr><td>4</td><td class="arabic">أَرْبَعَةٌ</td><td>Arba'atun</td></tr>
+        <tr><td>5</td><td class="arabic">خَمْسَةٌ</td><td>Khamsatun</td></tr>
+        <tr><td>6</td><td class="arabic">سِتَّةٌ</td><td>Sittatun</td></tr>
+        <tr><td>7</td><td class="arabic">سَبْعَةٌ</td><td>Sab'atun</td></tr>
+        <tr><td>8</td><td class="arabic">ثَمَانِيَةٌ</td><td>Tsamaaniyatun</td></tr>
+        <tr><td>9</td><td class="arabic">تِسْعَةٌ</td><td>Tis'atun</td></tr>
+        <tr><td>10</td><td class="arabic">عَشَرَةٌ</td><td>'Asyaratun</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Bilangan 11 - 20</h3>
+    <table>
+      <thead>
+        <tr><th>Angka</th><th>Bahasa Arab</th><th>Cara Baca</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>11</td><td class="arabic">أَحَدَ عَشَرَ</td><td>Ahada 'Asyara</td></tr>
+        <tr><td>12</td><td class="arabic">اِثْنَا عَشَرَ</td><td>Itsnaa 'Asyara</td></tr>
+        <tr><td>13</td><td class="arabic">ثَلَاثَةَ عَشَرَ</td><td>Tsalaasata 'Asyara</td></tr>
+        <tr><td>14</td><td class="arabic">أَرْبَعَةَ عَشَرَ</td><td>Arba'ata 'Asyara</td></tr>
+        <tr><td>15</td><td class="arabic">خَمْسَةَ عَشَرَ</td><td>Khamsata 'Asyara</td></tr>
+        <tr><td>16</td><td class="arabic">سِتَّةَ عَشَرَ</td><td>Sittata 'Asyara</td></tr>
+        <tr><td>17</td><td class="arabic">سَبْعَةَ عَشَرَ</td><td>Sab'ata 'Asyara</td></tr>
+        <tr><td>18</td><td class="arabic">ثَمَانِيَةَ عَشَرَ</td><td>Tsamaaniyata 'Asyara</td></tr>
+        <tr><td>19</td><td class="arabic">تِسْعَةَ عَشَرَ</td><td>Tis'ata 'Asyara</td></tr>
+        <tr><td>20</td><td class="arabic">عِشْرُوْنَ</td><td>'Isyruuna</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>💡 Pola Penting:</strong><br>
+      • Bilangan 11-19 = <em>[satuan] + عَشَرَ</em><br>
+      • 20 = عِشْرُوْنَ (berbeda pola!)<br>
+      • Perhatikan harakat fathah pada عَشَرَ untuk 11-19
+    </div>
+
+    <div class="nav-buttons">
+      <div></div>
+      <button class="btn-primary" onclick="goToPage('page-soal')">Lanjut ke Soal →</button>
+    </div>
+  </div>
+
+  <!-- HALAMAN 2: SOAL -->
+  <div class="page" id="page-soal">
+    <h2> Kuis Bilangan Arab (Level Lanjut)</h2>
+    
+    <div class="info-box">
+      <strong>Petunjuk:</strong> Kuis ini terdiri dari 15 soal dengan 4 tipe:
+      <br>• Pilihan ganda dengan pengecoh mirip
+      <br>• Isian singkat (ketik jawaban)
+      <br>• Hitungan matematika sederhana
+      <br>• Konteks kalimat
+      <br><br>Kerjakan dengan teliti!
+    </div>
+
+    <div class="form-group">
+      <label for="nama">Nama Lengkap:</label>
+      <input type="text" id="nama" placeholder="Tulis nama kamu di sini" required>
+    </div>
+
+    <div class="form-group">
+      <label for="kelas">Kelas:</label>
+      <input type="text" id="kelas" placeholder="Contoh: 6A" required>
+    </div>
+
+    <form id="quizForm">
+      <div id="questions-container"></div>
+      
+      <div class="nav-buttons">
+        <button type="button" class="btn-secondary" onclick="goToPage('page-materi')">← Kembali</button>
+        <button type="button" class="btn-success" onclick="submitQuiz()">Kirim Jawaban ✓</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- HALAMAN 3: HASIL -->
+  <div class="page" id="page-hasil">
+    <h2>📊 Hasil Kuis</h2>
+    
+    <div class="result-box">
+      <div class="score-label">Nilai Kamu</div>
+      <div class="score" id="score-display">0</div>
+      <div class="score-label" id="score-detail">dari 100</div>
+      <div id="status-msg" class="status pending">Memproses...</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-box">
+        <div class="num" id="stat-benar">0</div>
+        <div class="lbl">Benar</div>
+      </div>
+      <div class="stat-box">
+        <div class="num" id="stat-salah">0</div>
+        <div class="lbl">Salah</div>
+      </div>
+      <div class="stat-box">
+        <div class="num" id="stat-total">15</div>
+        <div class="lbl">Total Soal</div>
+      </div>
+    </div>
+
+    <h3>📋 Pembahasan Jawaban</h3>
+    <div id="review-container"></div>
+
+    <div class="nav-buttons">
+      <button class="btn-secondary" onclick="location.reload()"> Ulangi Kuis</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== DATA SOAL (LEVEL LANJUT) =====
+// Tipe: 'mc' = pilihan ganda, 'fill' = isian singkat
+const questions = [
+  // TIPE 1: Pilihan ganda dengan pengecoh mirip (5 soal)
+  {
+    type: 'mc',
+    q: "Bilangan 13 dalam bahasa Arab yang benar adalah...",
+    options: ["ثَلَاثَةٌ عَشَرَ", "ثَلَاثَةَ عَشَرَ", "ثَلَاثَةَ عَشْرَ", "ثَلَاثَةُ عَشَرَ"],
+    answer: 1,
+    explanation: "Pola 13: ثَلَاثَةَ (dengan fathah) + عَشَرَ (dengan fathah)"
+  },
+  {
+    type: 'mc',
+    q: "اِثْنَا عَشَرَ adalah bilangan...",
+    options: ["10", "11", "12", "20"],
+    answer: 2,
+    explanation: "اِثْنَا عَشَرَ = 12 (bukan 11 yang أَحَدَ عَشَرَ)"
+  },
+  {
+    type: 'mc',
+    q: "Perhatikan: خَمْسَةَ عَشَرَ. Bilangan ini adalah...",
+    options: ["14", "15", "16", "50"],
+    answer: 1,
+    explanation: "خَمْسَةَ = 5, عَشَرَ = 10, jadi 5+10 = 15"
+  },
+  {
+    type: 'mc',
+    q: "Bilangan 17 dalam bahasa Arab adalah...",
+    options: ["سَبْعَةٌ", "سَبْعَةَ عَشَرَ", "سِتَّةَ عَشَرَ", "ثَمَانِيَةَ عَشَرَ"],
+    answer: 1,
+    explanation: "17 = سَبْعَةَ (7) + عَشَرَ (10)"
+  },
+  {
+    type: 'mc',
+    q: "Manakah yang merupakan bilangan 20?",
+    options: ["عَشَرَةٌ", "تِسْعَةَ عَشَرَ", "عِشْرُوْنَ", "أَحَدَ عَشَرَ"],
+    answer: 2,
+    explanation: "20 = عِشْرُوْنَ (pola berbeda dari 11-19)"
+  },
+
+  // TIPE 2: Isian singkat (5 soal)
+  {
+    type: 'fill',
+    q: "Tuliskan bilangan 8 dalam bahasa Arab (dengan harakat lengkap):",
+    acceptedAnswers: ["ثَمَانِيَةٌ", "ثَمَانِيَة", "tsamaniyatun", "tsamaniyah"],
+    answer: "ثَمَانِيَةٌ",
+    explanation: "8 = ثَمَانِيَةٌ (Tsamaaniyatun)"
+  },
+  {
+    type: 'fill',
+    q: "Tuliskan bilangan 14 dalam bahasa Arab:",
+    acceptedAnswers: ["أَرْبَعَةَ عَشَرَ", "أربعة عشر", "arba'ata 'asyara", "arba ata asyara"],
+    answer: "أَرْبَعَةَ عَشَرَ",
+    explanation: "14 = أَرْبَعَةَ عَشَرَ (Arba'ata 'Asyara)"
+  },
+  {
+    type: 'fill',
+    q: "Tuliskan bilangan 19 dalam bahasa Arab:",
+    acceptedAnswers: ["تِسْعَةَ عَشَرَ", "تسعة عشر", "tis'ata 'asyara", "tis ata asyara"],
+    answer: "تِسْعَةَ عَشَرَ",
+    explanation: "19 = تِسْعَةَ عَشَرَ (Tis'ata 'Asyara)"
+  },
+  {
+    type: 'fill',
+    q: "Tuliskan bilangan 6 dalam bahasa Arab:",
+    acceptedAnswers: ["سِتَّةٌ", "سِتَّة", "sittatun", "sittah"],
+    answer: "سِتَّةٌ",
+    explanation: "6 = سِتَّةٌ (Sittatun)"
+  },
+  {
+    type: 'fill',
+    q: "Tuliskan bilangan 11 dalam bahasa Arab:",
+    acceptedAnswers: ["أَحَدَ عَشَرَ", "احد عشر", "ahada 'asyara", "ahada asyara"],
+    answer: "أَحَدَ عَشَرَ",
+    explanation: "11 = أَحَدَ عَشَرَ (Ahada 'Asyara)"
+  },
+
+  // TIPE 3: Hitungan matematika (3 soal)
+  {
+    type: 'mc',
+    q: "Hitunglah: خَمْسَةٌ + ثَلَاثَةٌ = ?",
+    options: ["سِتَّةٌ", "سَبْعَةٌ", "ثَمَانِيَةٌ", "تِسْعَةٌ"],
+    answer: 2,
+    explanation: "5 + 3 = 8 = ثَمَانِيَةٌ"
+  },
+  {
+    type: 'mc',
+    q: "Hitunglah: عَشَرَةٌ - أَرْبَعَةٌ = ?",
+    options: ["ثَلَاثَةٌ", "أَرْبَعَةٌ", "خَمْسَةٌ", "سِتَّةٌ"],
+    answer: 3,
+    explanation: "10 - 4 = 6 = سِتَّةٌ"
+  },
+  {
+    type: 'mc',
+    q: "Hitunglah: سَبْعَةٌ + سَبْعَةٌ = ?",
+    options: ["خَمْسَةَ عَشَرَ", "سِتَّةَ عَشَرَ", "سَبْعَةَ عَشَرَ", "ثَمَانِيَةَ عَشَرَ"],
+    answer: 0,
+    explanation: "7 + 7 = 14 = خَمْسَةَ عَشَرَ"
+  },
+
+  // TIPE 4: Konteks kalimat (2 soal)
+  {
+    type: 'mc',
+    q: "عُمْرِيْ خَمْسَةَ عَشَرَ سَنَةً. Berapa usia saya?",
+    options: ["13 tahun", "14 tahun", "15 tahun", "16 tahun"],
+    answer: 2,
+    explanation: "خَمْسَةَ عَشَرَ = 15, jadi usianya 15 tahun"
+  },
+  {
+    type: 'mc',
+    q: "فِيْ صَفِّنَا عِشْرُوْنَ طَالِبًا. Berapa jumlah siswa di kelas?",
+    options: ["10 siswa", "12 siswa", "20 siswa", "22 siswa"],
+    answer: 2,
+    explanation: "عِشْرُوْنَ = 20, jadi ada 20 siswa"
+  }
+];
+
+// ===== RENDER SOAL =====
+function renderQuestions() {
+  const container = document.getElementById('questions-container');
+  container.innerHTML = questions.map((q, i) => {
+    const typeLabel = q.type === 'mc' ? 'Pilihan Ganda' : 'Isian Singkat';
+    
+    if (q.type === 'mc') {
+      return `
+        <div class="question">
+          <div class="question-header">
+            <p>${i + 1}. ${q.q}</p>
+            <span class="type-badge">${typeLabel}</span>
+          </div>
+          <div class="options">
+            ${q.options.map((opt, j) => `
+              <label>
+                <input type="radio" name="q${i}" value="${j}" required>
+                <span class="arabic">${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    } else {
+      return `
+        <div class="question">
+          <div class="question-header">
+            <p>${i + 1}. ${q.q}</p>
+            <span class="type-badge">${typeLabel}</span>
+          </div>
+          <input type="text" class="fill-input" name="q${i}" placeholder="Ketik jawaban dalam bahasa Arab atau latin..." required>
+          <div class="hint">💡 Bisa ketik huruf Arab atau tulisan latin (contoh: tsamaniyatun)</div>
+        </div>
+      `;
+    }
+  }).join('');
+}
+
+// ===== NAVIGASI HALAMAN =====
+function goToPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== KIRIM KE SPREADSHEET =====
+const SPREADSHEET_URL = 'https://script.google.com/macros/s/AKfycbxN7X5bZ_kQJJXBQS9ql88Y3i8qIjfwHgwIjFiM60v0SXazjS-rad1XQv17EgITw8FXMg/execw';
+
+async function submitQuiz() {
+  const nama = document.getElementById('nama').value.trim();
+  const kelas = document.getElementById('kelas').value.trim();
+  
+  if (!nama || !kelas) {
+    alert('Mohon isi nama dan kelas terlebih dahulu!');
+    return;
+  }
+
+  // Cek semua soal terjawab
+  for (let i = 0; i < questions.length; i++) {
+    if (questions[i].type === 'mc') {
+      if (!document.querySelector(`input[name="q${i}"]:checked`)) {
+        alert(`Soal nomor ${i + 1} belum dijawab!`);
+        return;
+      }
+    } else {
+      const val = document.querySelector(`input[name="q${i}"]`).value.trim();
+      if (!val) {
+        alert(`Soal nomor ${i + 1} belum dijawab!`);
+        return;
+      }
+    }
+  }
+
+  // Hitung nilai
+  let correct = 0;
+  const answers = [];
+  
+  questions.forEach((q, i) => {
+    let isCorrect = false;
+    let jawabanSiswa = '';
+    
+    if (q.type === 'mc') {
+      const selected = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+      jawabanSiswa = q.options[selected];
+      isCorrect = selected === q.answer;
+    } else {
+      const inputVal = document.querySelector(`input[name="q${i}"]`).value.trim().toLowerCase();
+      jawabanSiswa = inputVal;
+      isCorrect = q.acceptedAnswers.some(ans => 
+        inputVal === ans.toLowerCase() || 
+        inputVal.replace(/\s+/g, ' ') === ans.toLowerCase().replace(/\s+/g, ' ')
+      );
+    }
+    
+    if (isCorrect) correct++;
+    
+    answers.push({
+      nomor: i + 1,
+      tipe: q.type === 'mc' ? 'PG' : 'Isian',
+      jawabanSiswa: jawabanSiswa,
+      jawabanBenar: q.answer,
+      benar: isCorrect,
+      penjelasan: q.explanation
+    });
+  });
+
+  const nilai = Math.round((correct / questions.length) * 100);
+
+  // Tampilkan hasil
+  document.getElementById('score-display').textContent = nilai;
+  document.getElementById('stat-benar').textContent = correct;
+  document.getElementById('stat-salah').textContent = questions.length - correct;
+  
+  const reviewContainer = document.getElementById('review-container');
+  reviewContainer.innerHTML = answers.map(a => `
+    <div class="review-item ${a.benar ? 'correct' : 'wrong'}">
+      <strong>Soal ${a.nomor} [${a.tipe}]:</strong> ${a.benar ? '✓ Benar' : '✗ Salah'}<br>
+      <small>
+        Jawaban kamu: <span class="arabic">${a.jawabanSiswa}</span><br>
+        ${!a.benar ? `Jawaban benar: <span class="arabic">${a.jawabanBenar}</span><br>` : ''}
+        💡 ${a.penjelasan}
+      </small>
+    </div>
+  `).join('');
+
+  goToPage('page-hasil');
+
+  // Kirim ke Google Spreadsheet
+  const statusMsg = document.getElementById('status-msg');
+  statusMsg.className = 'status pending';
+  statusMsg.textContent = 'Mengirim nilai ke guru...';
+
+  try {
+    await fetch(SPREADSHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        timestamp: new Date().toLocaleString('id-ID'),
+        nama: nama,
+        kelas: kelas,
+        nilai: nilai,
+        benar: correct,
+        salah: questions.length - correct,
+        total: questions.length,
+        detail: answers.map(a => `Soal ${a.nomor}(${a.tipe}): ${a.benar ? 'B' : 'S'}`).join(', ')
+      })
+    });
+
+    statusMsg.className = 'status success';
+    statusMsg.textContent = '✓ Nilai berhasil dikirim ke guru!';
+  } catch (error) {
+    console.error(error);
+    statusMsg.className = 'status error';
+    statusMsg.textContent = '⚠ Gagal mengirim. Nilai tetap tercatat di halaman ini.';
+  }
+}
+
+// Inisialisasi
+renderQuestions();
+</script>
+
+</body>
+</html>
